@@ -49,20 +49,38 @@
           <div>附属DNA长度上界:<el-input-number v-model="minLengthUpperBound" :step="100"></el-input-number></div>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" @click="submit" style="height: 80px">提交</el-button>
+          <el-button type="primary" @click="commit" style="height: 80px">提交</el-button>
         </el-col>
     </el-row>
+    <el-dialog
+      title="稍等片刻，喝杯茶吧"
+      :visible.sync="lock"
+      width="30%"
+      >
+      <span>{{txt}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="lock = false">取 消</el-button>
+        <el-button type="primary" @click="download()">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 
 import * as echarts from 'echarts'
+import {insertPangenomeFile} from '../api'
+import Cookies from 'js-cookie'
+import {baseURL} from '../api/http'
 
 export default {
   name: 'CreateData',
   data () {
     return {
+      resData: {},
+      txt: '正在马不停蹄的下载数据',
+      lock: false,
+      user: {},
       nodestr: '',
       edgestr: '',
       data: [],
@@ -77,6 +95,26 @@ export default {
     }
   },
   methods: {
+    download () {
+      let graphUrl = baseURL + this.resData.graphUrl
+      let readUrl = baseURL + this.resData.readUrl
+      let resUrl = baseURL + this.resData.resUrl
+      this.downloadFile('', graphUrl)
+      this.downloadFile('', readUrl)
+      this.downloadFile('', resUrl)
+      this.lock = false
+    },
+    downloadFile (fileName, url) {
+      const el = document.createElement('a')
+      el.style.display = 'none'
+      el.setAttribute('target', '_blank')
+      fileName && el.setAttribute('download', fileName)
+      el.href = url
+      console.log(el)
+      document.body.appendChild(el)
+      el.click()
+      document.body.removeChild(el)
+    },
     changeChart () {
       let nodestr = this.nodestr
       this.data = []
@@ -184,12 +222,54 @@ export default {
         }]
       }
       myChart.setOption(option)
+    },
+    commit () {
+      let user = this.user
+      if (this.name.length === 0) {
+        this.$notify({message: '请输入文件名', type: 'error'})
+        return
+      }
+      if (this.data.length === 0) {
+        this.$notify({message: '请输入一个泛基因图', type: 'error'})
+        return
+      }
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.01)'
+      })
+      this.lock = true
+      this.txt = '正在马不停蹄的下载数据'
+      let params = {
+        name: this.name,
+        userId: user.id,
+        data: this.data,
+        links: this.links,
+        num: this.num,
+        size: this.size,
+        maxLengthLowerBound: this.maxLengthLowerBound,
+        maxLengthUpperBound: this.maxLengthUpperBound,
+        minLengthLowerBound: this.minLengthLowerBound,
+        minLengthUpperBound: this.minLengthUpperBound
+      }
+      console.log(params)
+      insertPangenomeFile(params).then(res => {
+        this.resData = res.data
+        loading.close()
+        this.txt = '数据造完，是否下载'
+      })
+    },
+    init () {
+      let user = Cookies.get('user')
+      this.user = JSON.parse(user)
     }
   },
   mounted () {
     this.draw()
   },
   created () {
+    this.init()
   }
 }
 </script>

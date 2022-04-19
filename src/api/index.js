@@ -15,3 +15,9 @@ export const selectBenchmarkByUserId = (id) => get(`benchmark/selectByUserId?use
 export const selectBenchmarkById = (id) => get(`benchmark/selectById?id=${id}`)
 
 export const getIndexingBenchmarkchartInfo = (id) => get(`benchmark/getChartInfo?id=${id}`)
+
+export const insertPangenomeFile = (params) => post('PangenomeFile/insert', params)
+
+export const selectAllData = () => get('data/selectAll')
+
+export const visualize = (params) => post('visualization/visualize', params)

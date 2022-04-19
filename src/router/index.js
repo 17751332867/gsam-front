@@ -12,6 +12,8 @@ import BenchMarkSuccess from '../components/BenchMarkSuccess'
 import MyBenchMark from '../components/MyBenchMark'
 import BenchMarkDetails from '../components/BenchMarkDetails'
 import CreateData from '../components/CreateData'
+import FaFile from '../components/FaFile'
+import Visualization from '../components/Visualization'
 Vue.use(Router)
 
 let router = new Router({
@@ -57,6 +59,14 @@ let router = new Router({
           path: 'createData',
           name: 'createData',
           component: CreateData
+        }, {
+          path: 'faFile',
+          name: 'faFile',
+          component: FaFile
+        }, {
+          path: 'visualization',
+          name: 'visualization',
+          component: Visualization
         }
       ]
     }, {
