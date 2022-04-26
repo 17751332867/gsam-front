@@ -21,3 +21,13 @@ export const insertPangenomeFile = (params) => post('PangenomeFile/insert', para
 export const selectAllData = () => get('data/selectAll')
 
 export const visualize = (params) => post('visualization/visualize', params)
+
+export const selectPangenomeFile = (id) => get(`PangenomeFile/selectByUserId?userId=${id}`)
+
+export const deletePangenomeFile = (id) => get(`PangenomeFile/delete?id=${id}`)
+
+export const saveVisualization = (params) => post('visualization/save', params)
+
+export const selectVisualization = (id) => get(`/visualization/selectByUserId?userId=${id}`)
+
+export const selectVisualizationImgs = (id) => get(`/visualization/selectVisualizationImgs?id=${id}`)

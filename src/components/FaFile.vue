@@ -3,7 +3,7 @@
     <div>
       <el-row>
         <el-col :span="7" :offset="1" v-for="item in tableData" :key="item.id">
-          <el-card>
+          <el-card v-if="item.fileList!=null">
             <div slot="header" class="clearfix">
               <span>{{item.fileList.name}}</span>
             </div>
@@ -132,6 +132,7 @@ export default {
     getAllData () {
       selectAllData().then(res => {
         this.tableData = res.data
+        console.log(this.tableData)
       })
     }
   },

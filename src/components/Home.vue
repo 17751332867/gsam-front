@@ -58,9 +58,9 @@
             <i class="el-icon-menu"></i>
             <span slot="title"><router-link to="/home/myBenchmark">我的benchmark</router-link></span>
           </el-menu-item>
-          <el-menu-item index="3" disabled>
+          <el-menu-item index="3">
             <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
+            <span slot="title"><router-link to="/home/pangenoeFile">我的仿真数据</router-link></span>
           </el-menu-item>
           <el-menu-item index="4">
             <i class="el-icon-setting"></i>

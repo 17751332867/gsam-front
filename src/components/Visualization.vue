@@ -18,6 +18,11 @@
     </el-col>
   </el-row>
   <img v-for="item in imgs" class="DNA_img" :src="item" :key="item">
+  <el-row>
+    <el-col :offset="20" :span="4">
+      <el-button v-if="imgs.length!=0" @click="beforeSave">保存</el-button>
+    </el-col>
+  </el-row>
   <el-dialog
     title="提示"
     :visible.sync="dialogVisible"
@@ -30,18 +35,46 @@
     <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
   </el-dialog>
+  <el-dialog
+    title="保存"
+    :visible.sync="saveVisible"
+    width="30%"
+    :modal="false"
+    :before-close="handleClose"
+  >
+    <el-form :model="saveData">
+      <el-form-item label="名称" label-width="150">
+        <el-input v-model="saveData.name"></el-input>
+      </el-form-item>
+      <el-form-item label="描述" label-width="150">
+        <el-input v-model="saveData.description" type="textArea"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="saveVisible = false">取 消</el-button>
+      <el-button type="primary" @click="handleSave">确 定</el-button>
+    </div>
+  </el-dialog>
 </div>
 </template>
 
 <script>
 import {baseURL} from '../api/http'
-import {visualize} from '../api'
+import {saveVisualization, visualize} from '../api'
 import Cookies from 'js-cookie'
 
 export default {
   name: 'visualization',
   data () {
     return {
+      saveVisible: false,
+      saveData: {
+        userId: -1,
+        name: '',
+        description: '',
+        inputId: '',
+        outputList: []
+      },
       dialogVisible: false,
       fileList: [],
       ids: [],
@@ -52,6 +85,23 @@ export default {
     }
   },
   methods: {
+    handleSave () {
+      saveVisualization(this.saveData).then(res => {
+        this.$notify.success('保存成功')
+      })
+      this.saveVisible = false
+      this.$router.push({path: '/home/visualizationSuccess'})
+    },
+    beforeSave () {
+      let user = Cookies.get('user')
+      user = JSON.parse(user)
+      this.saveData.userId = user.id
+      this.saveData.inputId = this.ids[0]
+      this.imgs.forEach(res => {
+        this.saveData.outputList.push(res.replace(baseURL, ''))
+      })
+      this.saveVisible = true
+    },
     handleClose (done) {
       this.$confirm('确认关闭？')
         .then(_ => {

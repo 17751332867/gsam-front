@@ -14,6 +14,10 @@ import BenchMarkDetails from '../components/BenchMarkDetails'
 import CreateData from '../components/CreateData'
 import FaFile from '../components/FaFile'
 import Visualization from '../components/Visualization'
+
+import VisualizationSuccess from '../components/VisualizationSuccess'
+import MyVisualization from '../components/MyVisualization'
+import PangenomeFile from '../components/PangenomeFile'
 Vue.use(Router)
 
 let router = new Router({
@@ -23,6 +27,21 @@ let router = new Router({
       name: 'Home',
       component: Home,
       children: [
+        {
+          path: 'myVisualization',
+          name: 'myVisualization',
+          component: MyVisualization
+        },
+        {
+          path: 'visualizationSuccess',
+          name: 'visualizationSuccess',
+          component: VisualizationSuccess
+        },
+        {
+          path: 'pangenomeFile',
+          name: 'pangenomeFile',
+          component: PangenomeFile
+        },
         { path: 'index',
           name: 'index',
           component: Index
