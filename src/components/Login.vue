@@ -33,7 +33,7 @@
                 <el-input v-model="user.username"></el-input>
               </el-form-item>
               <el-form-item label="密码">
-                <el-input v-model="user.password"></el-input>
+                <el-input v-model="user.password" type="password"></el-input>
               </el-form-item>
               <el-form-item>
                 <el-row>

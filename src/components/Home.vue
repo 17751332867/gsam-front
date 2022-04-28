@@ -60,11 +60,11 @@
           </el-menu-item>
           <el-menu-item index="3">
             <i class="el-icon-document"></i>
-            <span slot="title"><router-link to="/home/pangenoeFile">我的仿真数据</router-link></span>
+            <span slot="title"><router-link to="/home/pangenomeFile">我的仿真数据</router-link></span>
           </el-menu-item>
           <el-menu-item index="4">
             <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
+            <span slot="title"><router-link to="/home/myVisualization">我的可视化</router-link></span>
           </el-menu-item>
         </el-menu>
       </el-drawer>
