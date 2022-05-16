@@ -31,3 +31,11 @@ export const saveVisualization = (params) => post('visualization/save', params)
 export const selectVisualization = (id) => get(`/visualization/selectByUserId?userId=${id}`)
 
 export const selectVisualizationImgs = (id) => get(`/visualization/selectVisualizationImgs?id=${id}`)
+
+export const scan = (id) => get(`/chromosome/scanFile?id=${id}`)
+
+export const insertChromosomes = (params) => post('chromosome/insertChromosomes', params)
+
+export const selectChromosomesByUserId = (id) => get(`chromosome/selectChromosomesByUserId?id=${id}`)
+
+export const productFa = (params) => get('chromosome/productFa', params)

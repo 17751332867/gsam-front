@@ -12,20 +12,12 @@
         </div>
         <div style="height: 60px;width: 800px;margin-left: 100px;display: inline-block;">
           <el-menu class="selection" mode="horizontal" background-color="#101319"  active-text-color="#ffd04b">
-            <el-submenu index="1">
-              <template slot="title">DNA算法实验</template>
-              <el-menu-item index="1-1"><router-link to="/home/IndexingAlgorithm">匹配算法</router-link></el-menu-item>
-              <el-menu-item index="1-2"></el-menu-item>
-            </el-submenu>
-            <el-submenu index="2">
-              <template slot="title">文件管理</template>
-              <el-menu-item index="2-1"><router-link to="/home/faFile">序列文件</router-link></el-menu-item>
-              <el-menu-item index="2-2">选项2</el-menu-item>
-              <el-menu-item index="2-3">选项3</el-menu-item>
-            </el-submenu>
+            <el-menu-item index="1-1"><router-link to="/home/IndexingAlgorithm">DNA算法实验</router-link></el-menu-item>
+            <el-menu-item index="2-1"><router-link to="/home/faFile">文件管理</router-link></el-menu-item>
             <el-menu-item index="3"><router-link to="/home/benchMark">benchmark</router-link></el-menu-item>
             <el-menu-item index="4"><router-link to="/home/createData">仿真数据</router-link></el-menu-item>
             <el-menu-item index="5"><router-link to="/home/visualization">DNA可视化</router-link></el-menu-item>
+            <el-menu-item index="6"><router-link to="/home/Chromosome">染色体提取</router-link></el-menu-item>
           </el-menu>
         </div>
       </el-header>
@@ -65,6 +57,10 @@
           <el-menu-item index="4">
             <i class="el-icon-setting"></i>
             <span slot="title"><router-link to="/home/myVisualization">我的可视化</router-link></span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-setting"></i>
+            <span slot="title"><router-link to="/home/myChromosome">数据提取</router-link></span>
           </el-menu-item>
         </el-menu>
       </el-drawer>

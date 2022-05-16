@@ -18,6 +18,9 @@ import Visualization from '../components/Visualization'
 import VisualizationSuccess from '../components/VisualizationSuccess'
 import MyVisualization from '../components/MyVisualization'
 import PangenomeFile from '../components/PangenomeFile'
+import Chromosome from '../components/Chromosome'
+import MyChromosome from '../components/MyChromosome'
+import ChromosomeSuccess from '../components/ChromosomeSuccess'
 Vue.use(Router)
 
 let router = new Router({
@@ -27,6 +30,21 @@ let router = new Router({
       name: 'Home',
       component: Home,
       children: [
+        {
+          path: 'chromosomeSuccess',
+          name: 'chromosomeSuccess',
+          component: ChromosomeSuccess
+        },
+        {
+          path: 'myChromosome',
+          name: 'myChromosome',
+          component: MyChromosome
+        },
+        {
+          path: 'Chromosome',
+          name: 'Chromosome',
+          component: Chromosome
+        },
         {
           path: 'myVisualization',
           name: 'myVisualization',
